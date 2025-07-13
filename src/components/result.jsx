@@ -30,7 +30,7 @@ function Result() {
     return (
         <>
             <Headerpart />
-            {level === "market" ? (
+            {level === "market" || level=== "/" ? (
                 <Market />
             ) : level === "technology" ? (
                 <Technology />
@@ -40,7 +40,9 @@ function Result() {
                 <Swot />
             ) : level === "trends" ? (
                 <Trends />
-            ) : null}
+            ) : <> <p> Got Your Results</p> <br></br>
+                    <p>Click Next</p>
+                </>}
             <Link to={backLink}><button>{backmess}</button></Link>
             {level === "swot" ? (
                 <Link to="/">

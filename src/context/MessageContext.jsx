@@ -6,6 +6,7 @@ const MessageContext = createContext();
 // Provider component
 const MessageProvider = ({ children }) => {
     const [message, setMessage] = useState('');
+    const [analysisResults, setAnalysisResults] = useState(null);
 
     const updateMessage = (newMessage) => {
         setMessage(newMessage);
@@ -15,10 +16,21 @@ const MessageProvider = ({ children }) => {
         setMessage('');
     };
 
+    const updateAnalysisResults = (results) => {
+        setAnalysisResults(results);
+    };
+
+    const clearAnalysisResults = () => {
+        setAnalysisResults(null);
+    };
+
     const value = {
         message,
         updateMessage,
-        clearMessage
+        clearMessage,
+        analysisResults,
+        updateAnalysisResults,
+        clearAnalysisResults
     };
 
     return (
