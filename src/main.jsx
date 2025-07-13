@@ -17,10 +17,6 @@ const router = createBrowserRouter([
     element: <Loading />,
   },
   {
-    path: "/result",
-    element: <Result />,
-  },
-  {
     path: "/result/:level",
     element: <Result />,
   },

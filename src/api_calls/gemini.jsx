@@ -28,6 +28,27 @@ const analysisSchema = {
         },
       },
     },
+    swot: {
+      type: "object",
+      properties: {
+        Strengths: {
+          type: "array",
+          items: { type: "string" },
+        },
+        Weaknesses: {
+          type: "array",
+          items: { type: "string" },
+        },
+        Opportunities: {
+          type: "array",
+          items: { type: "string" },
+        },
+        Threats: {
+          type: "array",
+          items: { type: "string" },
+        },
+      },
+    },
   },
 };
 
@@ -63,6 +84,14 @@ Given the startup idea: "${startupIdea}", provide a structured and detailed anal
    - **Data / Storage**: (e.g., PostgreSQL, Firebase)
    - **APIs / Integrations**: (e.g., Google Maps API, Payment Gateway)
    - **DevOps / Hosting**: (e.g., Vercel, Docker, CI/CD tools)
+
+4. **SWOT Analysis**
+   Provide a comprehensive SWOT analysis for this startup idea. Each category should have 3-4 bullet points.
+
+   - **Strengths**: Internal positive factors that give the startup an advantage
+   - **Weaknesses**: Internal negative factors that could hinder success
+   - **Opportunities**: External positive factors that could benefit the startup
+   - **Threats**: External negative factors that could pose challenges
 
 ---
 
