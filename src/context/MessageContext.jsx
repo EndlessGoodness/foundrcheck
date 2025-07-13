@@ -7,6 +7,7 @@ const MessageContext = createContext();
 const MessageProvider = ({ children }) => {
     const [message, setMessage] = useState('');
     const [analysisResults, setAnalysisResults] = useState(null);
+    const [searchResults, setSearchResults] = useState(null);
 
     const updateMessage = (newMessage) => {
         setMessage(newMessage);
@@ -24,13 +25,24 @@ const MessageProvider = ({ children }) => {
         setAnalysisResults(null);
     };
 
+    const updateSearchResults = (results) => {
+        setSearchResults(results);
+    };
+
+    const clearSearchResults = () => {
+        setSearchResults(null);
+    };
+
     const value = {
         message,
         updateMessage,
         clearMessage,
         analysisResults,
         updateAnalysisResults,
-        clearAnalysisResults
+        clearAnalysisResults,
+        searchResults,
+        updateSearchResults,
+        clearSearchResults
     };
 
     return (
