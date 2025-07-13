@@ -7,19 +7,23 @@ import Loading from './components/loading.jsx'
 import { MessageProvider } from './context/MessageContext'
 import Result from './components/result.jsx'
 
-const router=createBrowserRouter([
+const router = createBrowserRouter([
   {
-    path:"/",
-    element: <App/>,
+    path: "/",
+    element: <App />,
   },
   {
-    path:"/loading",
-    element:<Loading/>
+    path: "/loading",
+    element: <Loading />,
   },
   {
-    path:"/result",
-    element:<Result/>
-  }
+    path: "/result",
+    element: <Result />,
+  },
+  {
+    path: "/result/:level",
+    element: <Result />,
+  },
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>

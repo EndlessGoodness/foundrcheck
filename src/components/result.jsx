@@ -7,10 +7,26 @@ import Swot from "../analysis/swot";
 import Technology from "../analysis/technology";
 import Trends from "../analysis/trends";
 
+
 function Result() {
     const backmess = "<-Back";
     const nextmess = "Next->";
     const { level } = useParams();
+    // Define the order of the pages
+    const levels = ["market", "competitors", "trends", "technology", "swot"];
+    const currentIndex = levels.indexOf(level);
+
+    // Determine back and next links
+    let backLink = "/";
+    let nextLink = "/";
+    if (currentIndex === -1) {
+        // If no level, assume start page, next is first level
+        nextLink = `/result/market`;
+    } else {
+        backLink = currentIndex === 0 ? "/" : `/result/${levels[currentIndex - 1]}`;
+        nextLink = currentIndex === levels.length - 1 ? "/" : `/result/${levels[currentIndex + 1]}`;
+    }
+
     return (
         <>
             <Headerpart />
@@ -22,11 +38,17 @@ function Result() {
                 <Competitors />
             ) : level === "swot" ? (
                 <Swot />
-            ) : level === undefined || level === "" ? (
+            ) : level === "trends" ? (
                 <Trends />
             ) : null}
-            <Link to="#"><button>{backmess}</button></Link>
-            <Link to="#"><button>{nextmess}</button></Link>
+            <Link to={backLink}><button>{backmess}</button></Link>
+            {level === "swot" ? (
+                <Link to="/">
+                    <button>Home</button>
+                </Link>
+            ) : (
+                <Link to={nextLink}><button>{nextmess}</button></Link>
+            )}
         </>
     );
 }
