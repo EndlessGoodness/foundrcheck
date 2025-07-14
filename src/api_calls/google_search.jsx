@@ -96,10 +96,24 @@ export async function searchCompanyInfo(companyName) {
     if (data.items && data.items.length > 0) {
       // Take the first result as the most relevant
       const firstResult = data.items[0];
+      
+      // Check if the link contains the company name (case insensitive)
+      const companyNameLower = companyName.toLowerCase();
+      const linkLower = (firstResult.link || '').toLowerCase();
+      const displayLinkLower = (firstResult.displayLink || '').toLowerCase();
+      
+      // Check if company name appears in the URL or domain
+      const isRelevantLink = linkLower.includes(companyNameLower) || 
+                            displayLinkLower.includes(companyNameLower) ||
+                            // Also check for partial matches (e.g., "slack" in "slack.com")
+                            companyNameLower.split(' ').some(word => 
+                              word.length > 2 && (linkLower.includes(word) || displayLinkLower.includes(word))
+                            );
+      
       return {
         name: companyName,
         description: firstResult.snippet || 'No description available',
-        link: firstResult.link || '',
+        link: isRelevantLink ? (firstResult.link || '') : '',
         displayLink: firstResult.displayLink || '',
         // Generate a slug for consistency with the old format
         slug: companyName.toLowerCase().replace(/\s+/g, '-'),

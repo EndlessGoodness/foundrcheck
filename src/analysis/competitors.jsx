@@ -55,18 +55,27 @@ function Competitors() {
                                 )}
                                 <div style={{ flex: 1 }}>
                                     <h3 style={{ margin: '0 0 8px 0' }}>
-                                        <a 
-                                            href={competitor.link} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer" 
-                                            style={{ 
-                                                color: '#da552f', 
-                                                textDecoration: 'none',
+                                        {competitor.link ? (
+                                            <a 
+                                                href={competitor.link} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                style={{ 
+                                                    color: '#da552f', 
+                                                    textDecoration: 'none',
+                                                    fontWeight: 'bold'
+                                                }}
+                                            >
+                                                {competitor.name}
+                                            </a>
+                                        ) : (
+                                            <span style={{ 
+                                                color: '#333', 
                                                 fontWeight: 'bold'
-                                            }}
-                                        >
-                                            {competitor.name}
-                                        </a>
+                                            }}>
+                                                {competitor.name}
+                                            </span>
+                                        )}
                                     </h3>
                                     <p style={{ 
                                         color: '#545454', 
@@ -77,6 +86,17 @@ function Competitors() {
                                         {competitor.description}
                                     </p>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '15px', fontSize: '12px' }}>
+                                        {competitor.link && (
+                                            <span style={{ 
+                                                color: '#4CAF50', 
+                                                fontWeight: 'bold',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '4px'
+                                            }}>
+                                                🌐 Verified Website
+                                            </span>
+                                        )}
                                         <span style={{ 
                                             color: '#da552f', 
                                             fontWeight: 'bold',
