@@ -1,4 +1,4 @@
-// Google Custom Search API integration for trends only
+// Google Custom Search API integration for trends and competitor research
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 const CX = import.meta.env.VITE_GOOGLE_CX;
 
@@ -10,8 +10,6 @@ const CX = import.meta.env.VITE_GOOGLE_CX;
 export async function searchTrends(idea) {
   if (!API_KEY || !CX) {
     console.error('Google API key or CX not found in environment variables');
-    console.error('API_KEY exists:', !!API_KEY);
-    console.error('CX exists:', !!CX);
     return [];
   }
 
@@ -19,7 +17,6 @@ export async function searchTrends(idea) {
     const query = `${idea} market trends 2024 2025 industry growth statistics`;
     const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(query)}&num=10`;
     
-    console.log('Searching Google for trends:', query);
     const response = await fetch(url);
     
     if (!response.ok) {
@@ -29,7 +26,6 @@ export async function searchTrends(idea) {
     }
     
     const data = await response.json();
-    console.log('Google Search trends response:', data);
     
     if (data.error) {
       console.error('Google API error:', data.error);
@@ -45,7 +41,6 @@ export async function searchTrends(idea) {
       }));
     }
     
-    console.warn('No items found in Google Search response');
     return [];
   } catch (error) {
     console.error('Error searching for trends:', error);
@@ -55,7 +50,7 @@ export async function searchTrends(idea) {
 
 /**
  * Legacy function for backward compatibility
- * Now only searches for trends since competitors are handled by RapidAPI
+ * Now only searches for trends since competitors are handled by Google Search API
  * @param {string} idea - The startup idea to search for
  * @returns {Promise<Object>} Object containing trends array and empty competitors array
  */
@@ -131,9 +126,6 @@ export async function searchCompetitors(companyNames) {
   if (!companyNames || companyNames.length === 0) {
     return [];
   }
-
-  console.log('=== GOOGLE SEARCH COMPETITORS ===');
-  console.log('Searching for companies:', companyNames);
   
   const competitorDetails = [];
   
@@ -145,9 +137,11 @@ export async function searchCompetitors(companyNames) {
     }
   }
   
-  console.log('Google Search competitors found:', competitorDetails.length);
+  // Log the final competitors search results
+  console.log('=== GOOGLE SEARCH COMPETITORS ===');
+  console.log('Total competitors found:', competitorDetails.length);
   console.log('Competitor details:', competitorDetails);
-  console.log('================================');
+  console.log('==================================');
   
   return competitorDetails;
 }

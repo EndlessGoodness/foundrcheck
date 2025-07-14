@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { MessageContext } from "../context/MessageContext";
 import CallGemini from "../api_calls/gemini";
 import { searchTrends, searchCompetitors } from "../api_calls/google_search";
@@ -8,6 +8,7 @@ function Loading() {
     const { message, analysisResults, searchResults, updateAnalysisResults, updateSearchResults } = useContext(MessageContext);
     const [currentStep, setCurrentStep] = useState("Analyzing your idea...");
     const [progress, setProgress] = useState(0);
+    const hasStartedProcessing = useRef(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,7 +23,13 @@ function Loading() {
             return;
         }
 
+        // Prevent duplicate API calls
+        if (hasStartedProcessing.current) {
+            return;
+        }
+
         const fetchData = async () => {
+            hasStartedProcessing.current = true;
             try {
                 // Step 1: AI Analysis
                 setCurrentStep("🤖 Running AI analysis...");

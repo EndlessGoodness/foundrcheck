@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useCallback } from 'react';
 
 // Create the context
 const MessageContext = createContext();
@@ -9,29 +9,29 @@ const MessageProvider = ({ children }) => {
     const [analysisResults, setAnalysisResults] = useState(null);
     const [searchResults, setSearchResults] = useState(null);
 
-    const updateMessage = (newMessage) => {
+    const updateMessage = useCallback((newMessage) => {
         setMessage(newMessage);
-    };
+    }, []);
 
-    const clearMessage = () => {
+    const clearMessage = useCallback(() => {
         setMessage('');
-    };
+    }, []);
 
-    const updateAnalysisResults = (results) => {
+    const updateAnalysisResults = useCallback((results) => {
         setAnalysisResults(results);
-    };
+    }, []);
 
-    const clearAnalysisResults = () => {
+    const clearAnalysisResults = useCallback(() => {
         setAnalysisResults(null);
-    };
+    }, []);
 
-    const updateSearchResults = (results) => {
+    const updateSearchResults = useCallback((results) => {
         setSearchResults(results);
-    };
+    }, []);
 
-    const clearSearchResults = () => {
+    const clearSearchResults = useCallback(() => {
         setSearchResults(null);
-    };
+    }, []);
 
     const value = {
         message,
