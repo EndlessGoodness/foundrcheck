@@ -1,11 +1,24 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { MessageContext } from "../context/MessageContext";
 
 function Technology() {
-    const { analysisResults } = useContext(MessageContext);
+    const { message, analysisResults } = useContext(MessageContext);
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if (!message) {
+            navigate("/");
+            return;
+        }
+        if (!analysisResults) {
+            navigate("/loading");
+            return;
+        }
+    }, [message, analysisResults, navigate]);
     
     if (!analysisResults) {
-        return <p>Loading...</p>;
+        return <p>Redirecting...</p>;
     }
 
     const technologyData = analysisResults.technologies;

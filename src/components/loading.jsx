@@ -2,10 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { MessageContext } from "../context/MessageContext";
 import CallGemini from "../api_calls/gemini";
-import { searchAll } from "../api_calls/google_search";
+import { searchTrends, searchCompetitors } from "../api_calls/google_search";
 
 function Loading() {
-    const { message, updateAnalysisResults, updateSearchResults } = useContext(MessageContext);
+    const { message, analysisResults, searchResults, updateAnalysisResults, updateSearchResults } = useContext(MessageContext);
     const [currentStep, setCurrentStep] = useState("Analyzing your idea...");
     const [progress, setProgress] = useState(0);
     const navigate = useNavigate();
@@ -13,6 +13,12 @@ function Loading() {
     useEffect(() => {
         if (!message) {
             navigate("/");
+            return;
+        }
+
+        // If we already have analysis results, skip loading and go directly to results
+        if (analysisResults && searchResults) {
+            navigate("/result/market");
             return;
         }
 
@@ -30,7 +36,25 @@ function Loading() {
                 setCurrentStep("🔍 Researching competitors and trends...");
                 setProgress(50);
                 
-                const searchResult = await searchAll(message);
+                // Extract market domain from Gemini analysis for more targeted searches
+                const marketDomain = parsedGeminiResult?.market?.Market || 
+                                   parsedGeminiResult?.market?.["Market Analysis"] || 
+                                   parsedGeminiResult?.market?.domain ||
+                                   message; // fallback to original message
+                
+                // Get competitors using Google Search API for each company from Gemini
+                const competitorNames = parsedGeminiResult?.competitors?.Companies || [];
+                const competitors = await searchCompetitors(competitorNames);
+                
+                // Get trends from Google Search using market domain from Gemini
+                const trends = await searchTrends(marketDomain);
+                
+                // Combine the results
+                const searchResult = {
+                    competitors: competitors,
+                    trends: trends
+                };
+                
                 updateSearchResults(searchResult);
                 
                 // Step 3: Finalizing
@@ -58,7 +82,7 @@ function Loading() {
         };
 
         fetchData();
-    }, [message, navigate, updateAnalysisResults, updateSearchResults]);
+    }, [message, analysisResults, searchResults, navigate, updateAnalysisResults, updateSearchResults]);
 
     return (
         <>

@@ -19,6 +19,16 @@ const analysisSchema = {
         Suggestions: { type: "string" },
       },
     },
+    competitors: {
+      type: "object",
+      properties: {
+        Companies: {
+          type: "array",
+          items: { type: "string" },
+          maxItems: 5,
+        },
+      },
+    },
     technologies: {
       type: "object",
       properties: {
@@ -75,7 +85,13 @@ Given the startup idea: "${startupIdea}", provide a structured and detailed anal
    - Focus on user experience, market fit, scalability, or monetization.
    - Respond in bullet points.
 
-3. **Technologies Required for MVP**
+3. **Competitor Companies**
+   - List exactly 5 well-known companies that are direct or indirect competitors in this market domain.
+   - Use only company names (e.g., "Notion", "Slack", "Miro", "Figma", "Zoom").
+   - Focus on companies that might be found on Product Hunt or are well-known tech companies.
+   - Avoid generic descriptions, use specific company names only.
+
+4. **Technologies Required for MVP**
    Categorize the tech stack clearly under the following headers. Use bullet points for each.
 
    - **Frontend**: (e.g., React, Next.js)
@@ -85,7 +101,7 @@ Given the startup idea: "${startupIdea}", provide a structured and detailed anal
    - **APIs / Integrations**: (e.g., Google Maps API, Payment Gateway)
    - **DevOps / Hosting**: (e.g., Vercel, Docker, CI/CD tools)
 
-4. **SWOT Analysis**
+5. **SWOT Analysis**
    Provide a comprehensive SWOT analysis for this startup idea. Each category should have 3-4 bullet points.
 
    - **Strengths**: Internal positive factors that give the startup an advantage
@@ -107,6 +123,12 @@ Only output the information in the structure above — do not include additional
   });
 
   const response = await chat.sendMessage({ message: prompt });
+  
+  // Log the Gemini response
+  console.log('=== GEMINI API RESPONSE ===');
+  console.log('Raw response:', response.text);
+  console.log('===========================');
+  
   return response.text;
 }
 
