@@ -43,7 +43,7 @@ function IdeaInput() {
     }
 
     return (
-        <form onSubmit={submithandler}>
+        <form onSubmit={submithandler} className="gap-4">
             <label>🌟What's your IDEA today?</label>
             <br />
             {error && (
@@ -52,6 +52,7 @@ function IdeaInput() {
                 </div>
             )}
             <input
+                className="min-w-xl roundedx2 "
                 placeholder="Enter your Idea here...be as specific as possible (at least 5 words)"
                 value={inputValue}
                 onChange={handleInputChange}
