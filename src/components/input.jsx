@@ -43,22 +43,28 @@ function IdeaInput() {
     }
 
     return (
-        <form onSubmit={submithandler} className="gap-4">
-            <label>🌟What's your IDEA today?</label>
-            <br />
+        <form onSubmit={submithandler} className="space-y-6">
             {error && (
-                <div style={{ color: "red", fontSize: "14px", marginBottom: "10px" }}>
+                <div className="text-red-400 text-sm text-center bg-red-900 bg-opacity-20 border border-red-500 rounded-lg px-4 py-3">
                     {error}
                 </div>
             )}
+            
             <input
-                className="min-w-xl roundedx2 "
-                placeholder="Enter your Idea here...be as specific as possible (at least 5 words)"
+                type="text"
+                className="w-full px-6 py-4 text-lg bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                placeholder="Enter your innovative idea... be as specific as possible (at least 5 words)"
                 value={inputValue}
                 onChange={handleInputChange}
                 required
             />
-            <button type="submit">Go</button>
+            
+            <button 
+                type="submit"
+                className="w-full px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300"
+            >
+                Analyze My Idea
+            </button>
         </form>
     );
 }

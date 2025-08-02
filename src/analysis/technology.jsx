@@ -17,24 +17,78 @@ function Technology() {
         }
     }, [message, analysisResults, navigate]);
     
-    if (!analysisResults) {
+    if (!analysisResults || !analysisResults.technologies) {
         return <p>Redirecting...</p>;
     }
 
-    const technologyData = analysisResults.technologies;
+    const techData = analysisResults.technologies;
 
     return (
         <>
             <h2>Technology Analysis</h2>
-            {technologyData?.Technologies ? (
-                <ul>
-                    {technologyData.Technologies.map((tech, index) => (
-                        <li key={index}>{tech}</li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No technology data available</p>
-            )}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '20px' }}>
+                
+                {/* Frontend */}
+                <div style={{ padding: '15px', border: '2px solid #4CAF50', borderRadius: '8px', backgroundColor: '#f1f8e9' }}>
+                    <h3 style={{ color: '#2E7D32', marginBottom: '10px' }}>Frontend</h3>
+                    <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                        {techData.Frontend?.map((tech, index) => (
+                            <li key={index} style={{ marginBottom: '5px', color: '#1B5E20' }}>{tech}</li>
+                        )) || <li>No frontend technologies available</li>}
+                    </ul>
+                </div>
+
+                {/* Backend */}
+                <div style={{ padding: '15px', border: '2px solid #F44336', borderRadius: '8px', backgroundColor: '#ffebee' }}>
+                    <h3 style={{ color: '#C62828', marginBottom: '10px' }}>Backend</h3>
+                    <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                        {techData.Backend?.map((tech, index) => (
+                            <li key={index} style={{ marginBottom: '5px', color: '#B71C1C' }}>{tech}</li>
+                        )) || <li>No backend technologies available</li>}
+                    </ul>
+                </div>
+
+                {/* AI/ML */}
+                <div style={{ padding: '15px', border: '2px solid #2196F3', borderRadius: '8px', backgroundColor: '#e3f2fd' }}>
+                    <h3 style={{ color: '#1565C0', marginBottom: '10px' }}>AI/ML</h3>
+                    <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                        {techData["AI/ML"]?.map((tech, index) => (
+                            <li key={index} style={{ marginBottom: '5px', color: '#0D47A1' }}>{tech}</li>
+                        )) || <li>No AI/ML technologies available</li>}
+                    </ul>
+                </div>
+
+                {/* Data / Storage */}
+                <div style={{ padding: '15px', border: '2px solid #FF9800', borderRadius: '8px', backgroundColor: '#fff3e0' }}>
+                    <h3 style={{ color: '#E65100', marginBottom: '10px' }}>Data / Storage</h3>
+                    <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                        {techData["Data / Storage"]?.map((tech, index) => (
+                            <li key={index} style={{ marginBottom: '5px', color: '#BF360C' }}>{tech}</li>
+                        )) || <li>No data/storage technologies available</li>}
+                    </ul>
+                </div>
+
+                {/* APIs / Integrations */}
+                <div style={{ padding: '15px', border: '2px solid #4CAF50', borderRadius: '8px', backgroundColor: '#f1f8e9' }}>
+                    <h3 style={{ color: '#2E7D32', marginBottom: '10px' }}>APIs / Integrations</h3>
+                    <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                        {techData["APIs / Integrations"]?.map((tech, index) => (
+                            <li key={index} style={{ marginBottom: '5px', color: '#1B5E20' }}>{tech}</li>
+                        )) || <li>No APIs/integrations available</li>}
+                    </ul>
+                </div>
+
+                {/* DevOps / Hosting */}
+                <div style={{ padding: '15px', border: '2px solid #F44336', borderRadius: '8px', backgroundColor: '#ffebee' }}>
+                    <h3 style={{ color: '#C62828', marginBottom: '10px' }}>DevOps / Hosting</h3>
+                    <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                        {techData["DevOps / Hosting"]?.map((tech, index) => (
+                            <li key={index} style={{ marginBottom: '5px', color: '#B71C1C' }}>{tech}</li>
+                        )) || <li>No DevOps/hosting technologies available</li>}
+                    </ul>
+                </div>
+
+            </div>
         </>
     );
 }

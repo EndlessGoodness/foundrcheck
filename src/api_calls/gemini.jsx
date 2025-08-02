@@ -32,7 +32,27 @@ const analysisSchema = {
     technologies: {
       type: "object",
       properties: {
-        Technologies: {
+        Frontend: {
+          type: "array",
+          items: { type: "string" },
+        },
+        Backend: {
+          type: "array",
+          items: { type: "string" },
+        },
+        "AI/ML": {
+          type: "array",
+          items: { type: "string" },
+        },
+        "Data / Storage": {
+          type: "array",
+          items: { type: "string" },
+        },
+        "APIs / Integrations": {
+          type: "array",
+          items: { type: "string" },
+        },
+        "DevOps / Hosting": {
           type: "array",
           items: { type: "string" },
         },
