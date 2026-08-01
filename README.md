@@ -135,6 +135,18 @@ The application is optimized for deployment on modern hosting platforms:
 - **Netlify**: Static site hosting
 - **GitHub Pages**: Free hosting solution
 
+## 🧪 Jenkins CI
+
+This repository now includes a root `Jenkinsfile` for continuous integration.
+
+The pipeline performs these checks on every run:
+
+1. Installs dependencies with `npm ci`
+2. Runs ESLint with `npm run lint`
+3. Builds the production bundle with `npm run build`
+
+The build does not require API keys because the app reads its `VITE_*` values at runtime in the browser. If you later add a CI step that needs secrets, store them in Jenkins credentials and inject them as environment variables.
+
 ## 🤝 Contributing
 
 We welcome contributions! Please follow these steps:
