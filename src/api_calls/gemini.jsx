@@ -134,7 +134,7 @@ Given the startup idea: "${startupIdea}", provide a structured and detailed anal
 Only output the information in the structure above — do not include additional commentary or introductory text.`;
 
   const chat = ai.chats.create({
-    model: "gemini-2.5-flash",
+    model: "gemini-3.1-flash-lite",
     contents: prompt,
     config: {
       responseMimeType: "application/json",
