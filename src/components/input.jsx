@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { MessageContext } from "../context/MessageContext";
 
@@ -43,7 +43,7 @@ function IdeaInput() {
     }
 
     return (
-        <form onSubmit={submithandler} className="space-y-6">
+        <form onSubmit={submithandler} className="space-y-5">
             {error && (
                 <div className="text-red-400 text-sm text-center bg-red-900 bg-opacity-20 border border-red-500 rounded-lg px-4 py-3">
                     {error}
@@ -52,7 +52,7 @@ function IdeaInput() {
             
             <input
                 type="text"
-                className="w-full px-6 py-4 text-lg bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+               className="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-5 py-4 text-lg text-white placeholder-slate-400 shadow-inner shadow-black/40 focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 placeholder="Enter your innovative idea... be as specific as possible (at least 5 words)"
                 value={inputValue}
                 onChange={handleInputChange}
@@ -61,7 +61,7 @@ function IdeaInput() {
             
             <button 
                 type="submit"
-                className="w-full px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300"
+                className="w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-4 font-semibold text-white shadow-lg shadow-cyan-800/30 transition-all duration-200 hover:scale-[1.01] hover:from-cyan-400 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
                 Analyze My Idea
             </button>
